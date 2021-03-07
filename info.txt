@@ -1,0 +1,30 @@
+for proxy we can use direct minikube cli command 
+$http_proxy=<ip>
+
+
+minikube start --docker-env HTTP_PROXY=$http_proxy --docker-env HTTPS_PROXY=$https_proxy
+
+
+*********************************or**********************************************
+
+```
+apiVersion: v1
+clusters:
+- cluster:
+ certificate-authority: <path>/.minikube/ca.crt
+ server: <http://ip:port>
+ name: minikube
+contexts:
+- context:
+ cluster: minikube
+ user: minikube
+ name: minikube
+current-context: minikube
+kind: Config
+preferences: {}
+users:
+- name: minikube
+ user:
+ client-certificate: <path>/.minikube/profiles/minikube/client.crt
+ client-key: <path>/.minikube/profiles/minikube/client.key
+```
